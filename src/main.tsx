@@ -1,3 +1,7 @@
+import '@fontsource/onest/latin-400.css'
+import '@fontsource/onest/latin-500.css'
+import '@fontsource/onest/latin-600.css'
+import '@fontsource/onest/latin-700.css'
 import { StrictMode, useEffect, useRef, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import example from '../fixtures/official/base-example.xml?raw'
@@ -41,7 +45,7 @@ function App() {
   return <>
     <header className="app-header no-print">
       <div className="shell topbar">
-        <strong><span className="brand-mark" aria-hidden="true">P</span> {t('title')}</strong>
+        <strong><span className="brand-mark" aria-hidden="true">L</span> {t('title')}</strong>
         <label className="language">{t('language')}
           <select value={locale} onChange={event => setLocale(event.target.value)}>
             {locales.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
@@ -58,7 +62,7 @@ function App() {
             if (!(event.relatedTarget instanceof Node) || !event.currentTarget.contains(event.relatedTarget)) setDragging(false)
           }}
           onDrop={event => { event.preventDefault(); setDragging(false); void openFile(event.dataTransfer.files[0]) }}>
-          <p>{t('drop')}</p>
+          <h2>{t('drop')}</h2>
           <div className="actions">
             <button className="primary" type="button" onClick={() => picker.current?.click()}>{t('choose')}</button>
             <button type="button" onClick={() => {

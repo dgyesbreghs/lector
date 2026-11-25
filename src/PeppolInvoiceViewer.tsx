@@ -107,8 +107,10 @@ export function PeppolInvoiceViewer({ xml, invoice, locale }: PeppolInvoiceViewe
     </header>
     {warnings.length > 0 && <details className="warnings no-print">
       <summary>{t('warnings')} ({warnings.length})</summary>
-      <ul>{warnings.map(({ field, line }, index) => <li key={index}>
-        {line && t('line') + ' ' + line + ' · '}{t('missing')} — {t(field)}
+      <ul>{warnings.map((warning, index) => <li key={index}>
+        {'code' in warning ? <>{t(warning.code)} — <code>{warning.value}</code></> : <>
+          {warning.line && t('line') + ' ' + warning.line + ' · '}{t('missing')} — {t(warning.field)}
+        </>}
       </li>)}</ul>
     </details>}
     <div className="parties"><PartyBlock title={t('seller')} party={data.seller} t={t} /><PartyBlock title={t('buyer')} party={data.buyer} t={t} /></div>

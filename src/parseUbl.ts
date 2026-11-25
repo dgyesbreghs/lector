@@ -4,6 +4,8 @@ export const MAX_XML_BYTES = 10 * 1024 * 1024
 const ubl = 'urn:oasis:names:specification:ubl:schema:xsd:'
 const basic = ubl + 'CommonBasicComponents-2'
 const aggregate = ubl + 'CommonAggregateComponents-2'
+const billingSpecification = 'urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0'
+const billingProfile = 'urn:fdc:peppol.eu:2017:poacc:billing:01:1.0'
 const envelope = 'http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader'
 
 function matches(element: Element, namespace: string, name: string) {
@@ -176,6 +178,14 @@ export function parseUbl(xml: string): ParseResult {
     if (!kind) return { ok: false, error: 'unsupportedDocument' }
     const invoice = extract(root, kind)
     const warnings: ParseWarning[] = []
+    const specification = value(root, 'CustomizationID')
+    const profile = value(root, 'ProfileID')
+    const ublVersion = value(root, 'UBLVersionID')
+    if (specification && (!specification.startsWith(billingSpecification) || specification.includes('::'))) {
+      warnings.push({ code: 'unexpectedSpecification', value: specification })
+    }
+    if (profile && profile !== billingProfile) warnings.push({ code: 'unexpectedProfile', value: profile })
+    if (ublVersion && ublVersion !== '2.1') warnings.push({ code: 'unexpectedUblVersion', value: ublVersion })
     const required = (fields: Record<string, unknown>, line?: number) => {
       for (const [field, content] of Object.entries(fields)) {
         if (!content) warnings.push({ field, line })
@@ -183,8 +193,8 @@ export function parseUbl(xml: string): ParseResult {
     }
     required({
       number: invoice.number, issueDate: invoice.issueDate, typeCode: invoice.typeCode,
-      currency: invoice.currency, customization: value(root, 'CustomizationID'),
-      profile: value(root, 'ProfileID'), sellerName: invoice.seller?.name,
+      currency: invoice.currency, customization: specification,
+      profile, sellerName: invoice.seller?.name,
       buyerName: invoice.buyer?.name, sellerEndpoint: invoice.seller?.endpoint,
       buyerEndpoint: invoice.buyer?.endpoint, sellerCountry: invoice.seller?.address?.country,
       buyerCountry: invoice.buyer?.address?.country, lineExtension: invoice.totals.lineExtension,

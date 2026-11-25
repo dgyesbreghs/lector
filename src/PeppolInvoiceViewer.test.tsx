@@ -55,6 +55,15 @@ describe('PeppolInvoiceViewer', () => {
     expect(screen.getByText('Missing required field — Seller name')).toBeTruthy()
   })
 
+  it('shows a translated format warning while keeping the invoice visible', () => {
+    const xml = invoiceXml.replace('urn:fdc:peppol.eu:2017:poacc:billing:01:1.0', 'urn:example:process')
+    render(<PeppolInvoiceViewer locale="nl-BE" xml={xml} />)
+    expect(screen.getByRole('heading', { name: 'MIN-1' })).toBeTruthy()
+    fireEvent.click(screen.getByText(/^Waarschuwingen/))
+    expect(screen.getByText(/Onbekend Peppol Billing-proces-ID/)).toBeTruthy()
+    expect(screen.getByText('urn:example:process')).toBeTruthy()
+  })
+
   it('downloads an attachment as a Blob and only links HTTP(S) URIs', () => {
     vi.useFakeTimers()
     const create = vi.fn(() => 'blob:test')

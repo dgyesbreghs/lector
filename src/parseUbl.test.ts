@@ -97,6 +97,23 @@ describe('edge cases', () => {
     expect(result.invoice.delivery).toBeUndefined()
     expect(parsed('edge/credit-note').warnings).toContainEqual({ field: 'sellerName', line: undefined })
   })
+  it('warns about foreign declarations while preserving the readable invoice', () => {
+    const xml = fixture('edge/missing-optional')
+    const result = parseUbl(xml
+      .replace('<b:CustomizationID>', '<b:UBLVersionID>2.3</b:UBLVersionID><b:CustomizationID>')
+      .replace('urn:cen.eu:en16931:2017#compliant#urn:fdc:peppol.eu:2017:poacc:billing:3.0', 'urn:example:custom')
+      .replace('urn:fdc:peppol.eu:2017:poacc:billing:01:1.0', 'urn:example:process'))
+    expect(result).toMatchObject({
+      ok: true, invoice: { number: 'MIN-1' }, warnings: [
+        { code: 'unexpectedSpecification', value: 'urn:example:custom' },
+        { code: 'unexpectedProfile', value: 'urn:example:process' },
+        { code: 'unexpectedUblVersion', value: '2.3' },
+      ],
+    })
+    const extension = parseUbl(xml.replace('billing:3.0</', 'billing:3.0#conformant#urn:example:extension</'))
+    expect(extension.ok && extension.warnings).toEqual([])
+  })
+
   it('rejects malformed XML, foreign roots, DOCTYPE and oversized input', () => {
     expect(parseUbl(fixture('edge/malformed'))).toEqual({ ok: false, error: 'malformedXml' })
     expect(parseUbl('<Invoice/>')).toEqual({ ok: false, error: 'unsupportedDocument' })

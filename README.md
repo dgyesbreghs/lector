@@ -24,6 +24,6 @@ import { PeppolInvoiceViewer } from './src/PeppolInvoiceViewer'
 <PeppolInvoiceViewer invoice={parsedInvoice} locale="fr-BE" />
 ```
 
-[The model](src/model.ts) describes the viewer input. [The UBL parser](src/parseUbl.ts) returns a result with missing-field warnings or an error code. Only the XML input requires the browser's XML parser. A future backend or CII parser can supply the same model.
+[The model](src/model.ts) describes the viewer input. [The UBL parser](src/parseUbl.ts) returns a result with format warnings, missing-field warnings, or an error code. The format checks cover the declared Peppol billing specification and process, plus the UBL version when declared. Full conformance requires schema and Schematron validation. Only the XML input requires the browser's XML parser. A future backend or CII parser can supply the same model.
 
 [Official fixture source](https://github.com/OpenPEPPOL/peppol-bis-invoice-3/tree/master/rules/examples). The edge fixtures deliberately contain partial documents to exercise field extraction and warnings. Inline PDF preview depends on browser PDF support.

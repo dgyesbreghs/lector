@@ -103,7 +103,9 @@ export interface EInvoice {
   attachments: Attachment[]
 }
 export type ParseError = 'malformedXml' | 'unsupportedDocument' | 'doctype' | 'tooLarge'
-export interface ParseWarning { field: string; line?: number }
+export type ParseWarning =
+  | { field: string; line?: number }
+  | { code: 'unexpectedSpecification' | 'unexpectedProfile' | 'unexpectedUblVersion'; value: string }
 export type ParseResult =
   | { ok: true; invoice: EInvoice; warnings: ParseWarning[] }
   | { ok: false; error: ParseError }
