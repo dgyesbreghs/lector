@@ -1,0 +1,6 @@
+<e:StandardBusinessDocument xmlns:e="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader">
+<e:StandardBusinessDocumentHeader/>
+<u:Invoice xmlns:u="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:b="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:a="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+<b:ID>WRAPPED-1</b:ID><b:IssueDate>2026-11-20</b:IssueDate>
+</u:Invoice>
+</e:StandardBusinessDocument>

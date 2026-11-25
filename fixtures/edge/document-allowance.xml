@@ -1,0 +1,5 @@
+<u:Invoice xmlns:u="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:b="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:a="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+<b:ID>ALLOW-1</b:ID>
+<a:AllowanceCharge><b:ChargeIndicator>false</b:ChargeIndicator><b:AllowanceChargeReason>Volume discount</b:AllowanceChargeReason><b:MultiplierFactorNumeric>10</b:MultiplierFactorNumeric><b:Amount>10.00</b:Amount><b:BaseAmount>100.00</b:BaseAmount><a:TaxCategory><b:ID>S</b:ID><b:Percent>21</b:Percent></a:TaxCategory></a:AllowanceCharge>
+<a:LegalMonetaryTotal><b:AllowanceTotalAmount>10.00</b:AllowanceTotalAmount><b:PayableAmount>108.90</b:PayableAmount></a:LegalMonetaryTotal>
+</u:Invoice>

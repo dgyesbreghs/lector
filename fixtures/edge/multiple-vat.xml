@@ -1,0 +1,3 @@
+<u:Invoice xmlns:u="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:b="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:a="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+<b:ID>VAT-2</b:ID><a:TaxTotal><a:TaxSubtotal><b:TaxableAmount currencyID="EUR">100.00</b:TaxableAmount><b:TaxAmount currencyID="EUR">6.00</b:TaxAmount><a:TaxCategory><b:ID>S</b:ID><b:Percent>6</b:Percent></a:TaxCategory></a:TaxSubtotal><a:TaxSubtotal><b:TaxableAmount currencyID="EUR">200.00</b:TaxableAmount><b:TaxAmount currencyID="EUR">42.00</b:TaxAmount><a:TaxCategory><b:ID>S</b:ID><b:Percent>21</b:Percent></a:TaxCategory></a:TaxSubtotal></a:TaxTotal>
+</u:Invoice>

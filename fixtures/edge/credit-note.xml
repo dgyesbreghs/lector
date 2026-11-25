@@ -1,0 +1,4 @@
+<u:CreditNote xmlns:u="urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2" xmlns:b="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:a="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2">
+<b:ID>CN-42</b:ID><b:IssueDate>2026-11-24</b:IssueDate><b:CreditNoteTypeCode>381</b:CreditNoteTypeCode><b:DocumentCurrencyCode>EUR</b:DocumentCurrencyCode>
+<a:CreditNoteLine><b:ID>1</b:ID><b:CreditedQuantity unitCode="C62">2.00</b:CreditedQuantity><b:LineExtensionAmount>25.00</b:LineExtensionAmount><a:Item><b:Name>Returned books</b:Name></a:Item></a:CreditNoteLine>
+</u:CreditNote>
